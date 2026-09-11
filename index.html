@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Malabar Restaurant</title>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f7f7f7;
+    color: #222;
+}
+
+/* HEADER */
+
+header {
+    background: white;
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 8%;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 22px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+nav a:hover {
+    color: #f15a00;
+}
+
+/* HERO */
+
+.hero {
+    min-height: 430px;
+
+    background-image:
+        linear-gradient(
+            rgba(0,0,0,0.45),
+            rgba(0,0,0,0.45)
+        ),
+        url("https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=1600&q=80");
+
+    background-size: cover;
+    background-position: center;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 20px;
+    margin-bottom: 28px;
+}
+
+.hero-btn {
+    background: #f15a00;
+    color: white;
+    padding: 13px 28px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.hero-btn:hover {
+    background: #d94e00;
+}
+
+/* SECTIONS */
+
+section {
+    padding: 60px 8%;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 10px;
+}
+
+.section-subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 35px;
+}
+
+/* CATEGORIES */
+
+.categories {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.category-btn {
+    border: 1px solid #ddd;
+    background: white;
+    padding: 10px 22px;
+    border-radius: 25px;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.category-btn:hover,
+.category-btn.active {
+    background: #f15a00;
+    color: white;
+    border-color: #f15a00;
+}
+
+/* MENU */
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.menu-card {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.menu-card:hover {
+    transform: translateY(-3px);
+}
+
+.food-image {
+    width: 100%;
+    height: 270px;
+    background: #f1f1f1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.food-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.menu-details {
+    padding: 20px;
+}
+
+.menu-details h3 {
+    font-size: 21px;
+    margin-bottom: 8px;
+}
+
+.menu-details p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.price {
+    color: #f15a00;
+    font-size: 19px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.add-btn {
+    background: #f15a00;
+    color: white;
+    border: none;
+    padding: 11px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-btn:hover {
+    background: #d94e00;
+}
+
+.add-btn:disabled {
+    background: #aaa;
+    cursor: not-allowed;
+}
+
+/* CART */
+
+.cart-box {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.quantity-controls button {
+    border: none;
+    background: #eee;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.remove-btn {
+    color: #d00 !important;
+    background: none !important;
+    margin-left: 8px;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.clear-btn {
+    margin-top: 15px;
+    background: #555;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* CHECKOUT */
+
+.checkout-box {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 7px;
+    font-weight: bold;
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.form-group textarea {
+    height: 90px;
+    resize: vertical;
+}
+
+/* OFFERS */
+
+.offers-box {
+    background: #fff7f0;
+    border: 1px solid #f15a00;
+    border-radius: 8px;
+    padding: 18px;
+    margin: 20px 0;
+}
+
+.offers-box h3 {
+    color: #f15a00;
+    margin-bottom: 12px;
+}
+
+.offer {
+    margin: 8px 0;
+    font-size: 15px;
+}
+
+/* DISCOUNT */
+
+.discount-box {
+    display: flex;
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.discount-box input {
+    flex: 1;
+    padding: 11px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.discount-box button {
+    padding: 11px 20px;
+    border: none;
+    background: #222;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* BILL */
+
+.bill {
+    margin-top: 25px;
+    border-top: 1px solid #ddd;
+    padding-top: 20px;
+}
+
+.bill-row {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+}
+
+.bill-total {
+    font-size: 21px;
+    font-weight: bold;
+    color: #f15a00;
+    border-top: 1px solid #ddd;
+    padding-top: 12px;
+}
+
+/* PLACE ORDER */
+
+.place-order {
+    width: 100%;
+    padding: 14px;
+    background: #f15a00;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+/* ORDERS */
+
+.order-box {
+    max-width: 900px;
+    margin: auto;
+}
+
+.order-card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+}
+
+.order-card h3 {
+    margin-bottom: 10px;
+}
+
+.order-card p {
+    color: #666;
+    margin: 5px 0;
+    line-height: 1.5;
+}
+
+/* ABOUT */
+
+.about-content {
+    max-width: 850px;
+    margin: auto;
+    text-align: center;
+    line-height: 1.7;
+    color: #666;
+}
+
+/* CONTACT */
+
+.contact-box {
+    max-width: 700px;
+    margin: auto;
+    text-align: center;
+    line-height: 2;
+    color: #555;
+}
+
+/* FOOTER */
+
+footer {
+    background: #222;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 800px) {
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav a {
+        margin: 5px;
+    }
+
+    .hero-content h1 {
+        font-size: 35px;
+    }
+
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+
+    section {
+        padding: 45px 5%;
+    }
+
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+
+    <div class="logo">
+        🍽️ MALABAR RESTAURANT
+    </div>
+
+    <nav>
+
+        <a href="#home">Home</a>
+
+        <a href="#menu">Menu</a>
+
+        <a href="#cart">Cart 🛒</a>
+
+        <a href="#checkout">Checkout</a>
+
+        <a href="#orders">Orders</a>
+
+        <a href="#about">About</a>
+
+        <a href="#contact">Contact</a>
+
+    </nav>
+
+</header>
+
+
+<!-- HOME -->
+
+<section id="home" class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+            Welcome to Malabar Restaurant
+        </h1>
+
+        <p>
+            Delicious food made with love
+        </p>
+
+        <a href="#menu" class="hero-btn">
+            View Menu
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- MENU -->
+
+<section id="menu">
+
+    <h2 class="section-title">
+        Our Menu
+    </h2>
+
+    <p class="section-subtitle">
+        Choose your favourite dish
+    </p>
+
+
+    <div class="categories">
+
+        <button
+            class="category-btn active"
+            onclick="filterMenu('All', this)">
+            All
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filterMenu('Starters', this)">
+            Starters
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filterMenu('Main Course', this)">
+            Main Course
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filterMenu('Desserts', this)">
+            Desserts
+        </button>
+
+        <button
+            class="category-btn"
+            onclick="filterMenu('Beverages', this)">
+            Beverages
+        </button>
+
+    </div>
+
+
+    <div id="menuGrid" class="menu-grid"></div>
+
+</section>
+
+
+<!-- CART -->
+
+<section id="cart">
+
+    <h2 class="section-title">
+        Your Cart
+    </h2>
+
+    <p class="section-subtitle">
+        Review your selected items
+    </p>
+
+
+    <div class="cart-box">
+
+        <div id="cartItems">
+            <p>Your cart is empty.</p>
+        </div>
+
+
+        <div class="cart-total">
+
+            Total: ₹<span id="cartTotal">0.00</span>
+
+        </div>
+
+
+        <button
+            class="clear-btn"
+            onclick="clearCart()">
+
+            Clear Cart
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- CHECKOUT -->
+
+<section id="checkout">
+
+    <h2 class="section-title">
+        Checkout
+    </h2>
+
+    <p class="section-subtitle">
+        Enter your details to place your order
+    </p>
+
+
+    <div class="checkout-box">
+
+
+        <div class="form-group">
+
+            <label>Customer Name</label>
+
+            <input
+                type="text"
+                id="customerName"
+                placeholder="Enter your name">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Phone Number</label>
+
+            <input
+                type="text"
+                id="customerPhone"
+                placeholder="Enter your phone number">
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>Address</label>
+
+            <textarea
+                id="customerAddress"
+                placeholder="Enter your address"></textarea>
+
+        </div>
+
+
+        <!-- OFFERS -->
+
+        <div class="offers-box">
+
+            <h3>
+                🎁 Available Offers
+            </h3>
+
+            <p class="offer">
+                🏷️ <strong>SAVE10</strong>
+                — Get <strong>10% OFF</strong>
+            </p>
+
+            <p class="offer">
+                🏷️ <strong>SAVE20</strong>
+                — Get <strong>20% OFF</strong>
+            </p>
+
+        </div>
+
+
+        <!-- DISCOUNT -->
+
+        <div class="discount-box">
+
+            <input
+                type="text"
+                id="discountCode"
+                placeholder="Enter discount code">
+
+            <button onclick="applyDiscount()">
+                Apply
+            </button>
+
+        </div>
+
+
+        <div id="discountMessage"></div>
+
+
+        <!-- BILL -->
+
+        <div class="bill">
+
+            <div class="bill-row">
+
+                <span>Subtotal</span>
+
+                <span>
+                    ₹<span id="subtotal">0.00</span>
+                </span>
+
+            </div>
+
+
+            <div class="bill-row">
+
+                <span>Discount</span>
+
+                <span>
+                    - ₹<span id="discount">0.00</span>
+                </span>
+
+            </div>
+
+
+            <div class="bill-row bill-total">
+
+                <span>Total</span>
+
+                <span>
+                    ₹<span id="finalTotal">0.00</span>
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <button
+            class="place-order"
+            onclick="placeOrder()">
+
+            Place Order
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ORDERS -->
+
+<section id="orders">
+
+    <h2 class="section-title">
+        Order History
+    </h2>
+
+    <p class="section-subtitle">
+        Your previous orders
+    </p>
+
+
+    <div id="orderHistory" class="order-box">
+
+        <p style="text-align:center;color:#777;">
+            No orders placed yet.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ABOUT -->
+
+<section id="about">
+
+    <h2 class="section-title">
+        About Us
+    </h2>
+
+
+    <div class="about-content">
+
+        <p>
+            Malabar Restaurant offers delicious
+            and freshly prepared dishes inspired
+            by the flavours of Kerala and Malabar.
+
+            Our goal is to provide quality food
+            and a pleasant dining experience
+            for every customer.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- CONTACT -->
+
+<section id="contact">
+
+    <h2 class="section-title">
+        Contact Us
+    </h2>
+
+
+    <div class="contact-box">
+
+        <p>
+            📍 Malabar Restaurant, Kerala
+        </p>
+
+        <p>
+            📞 +91 98765 43210
+        </p>
+
+        <p>
+            ✉️ malabarrestaurant@example.com
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <p>
+        © 2026 Malabar Restaurant.
+        All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+/* ==================================================
+   MENU DATA
+   ================================================== */
+
+let menuItems = [];
+
+
+/* Real food images */
+
+const menuImages = {
+
+    "M01":
+    "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=900&q=80",
+
+    "M02":
+    "https://images.unsplash.com/photo-1527477396000-e27163b481c2?auto=format&fit=crop&w=900&q=80",
+
+    "M03":
+    "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=900&q=80",
+
+    "M04":
+    "https://images.unsplash.com/photo-1603133872878-684f208fb84b?auto=format&fit=crop&w=900&q=80",
+
+    "M05":
+    "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80",
+
+    "M06":
+    "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=80",
+
+    "M07":
+    "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80"
+
+};
+
+
+/* Descriptions */
+
+function getDescription(id) {
+
+    const descriptions = {
+
+        "M01": "Crispy golden French fries.",
+
+        "M02": "Crispy chicken wings with spices.",
+
+        "M03": "Aromatic Malabar style chicken biriyani.",
+
+        "M04": "Fried rice with fresh vegetables.",
+
+        "M05": "Soft chocolate cake with rich flavour.",
+
+        "M06": "Creamy and delicious ice cream.",
+
+        "M07": "Refreshing fresh lime drink."
+
+    };
+
+    return descriptions[id] || "";
+
+}
+
+
+/* Convert Java category */
+
+function convertCategory(category) {
+
+    if (category === "STARTER")
+        return "Starters";
+
+    if (category === "MAIN_COURSE")
+        return "Main Course";
+
+    if (category === "DESSERT")
+        return "Desserts";
+
+    if (category === "BEVERAGE")
+        return "Beverages";
+
+    return category;
+
+}
+
+
+/* ==================================================
+   LOAD MENU FROM JAVA
+   ================================================== */
+
+async function loadMenu() {
+
+    try {
+
+        const response =
+            await fetch("/api/menu");
+
+
+        if (!response.ok) {
+
+            throw new Error("Menu request failed.");
+
+        }
+
+
+        const javaMenu =
+            await response.json();
+
+
+        menuItems = javaMenu.map(item => {
+
+            return {
+
+                id: item.id,
+
+                name: item.name,
+
+                price: Number(item.price),
+
+                category:
+                    convertCategory(item.category),
+
+                available:
+                    item.available,
+
+                image:
+                    menuImages[item.id],
+
+                description:
+                    getDescription(item.id)
+
+            };
+
+        });
+
+
+        displayMenu();
+
+    }
+
+    catch (error) {
+
+        console.error(error);
+
+        document.getElementById("menuGrid").innerHTML = `
+
+            <p style="
+                grid-column:1/-1;
+                text-align:center;
+                color:red;
+            ">
+
+                Unable to load menu from Java server.
+
+            </p>
+
+        `;
+
+    }
+
+}
+
+
+/* ==================================================
+   DISPLAY MENU
+   ================================================== */
+
+function displayMenu(category = "All") {
+
+    const menuGrid =
+        document.getElementById("menuGrid");
+
+
+    menuGrid.innerHTML = "";
+
+
+    let filteredItems;
+
+
+    if (category === "All") {
+
+        filteredItems = menuItems;
+
+    }
+
+    else {
+
+        filteredItems =
+            menuItems.filter(
+                item => item.category === category
+            );
+
+    }
+
+
+    filteredItems.forEach(item => {
+
+        const card =
+            document.createElement("div");
+
+
+        card.className =
+            "menu-card";
+
+
+        card.innerHTML = `
+
+            <div class="food-image">
+
+                <img
+                    src="${item.image}"
+                    alt="${item.name}">
+
+            </div>
+
+
+            <div class="menu-details">
+
+                <h3>
+                    ${item.name}
+                </h3>
+
+                <p>
+                    ${item.description}
+                </p>
+
+                <div class="price">
+                    ₹${item.price.toFixed(2)}
+                </div>
+
+
+                <button
+                    class="add-btn"
+                    ${!item.available ? "disabled" : ""}
+                    onclick="addToCart('${item.id}')">
+
+                    ${
+                        item.available
+                        ? "Add to Cart"
+                        : "Out of Stock"
+                    }
+
+                </button>
+
+            </div>
+
+        `;
+
+
+        menuGrid.appendChild(card);
+
+    });
+
+}
+
+
+/* ==================================================
+   FILTER
+   ================================================== */
+
+function filterMenu(category, button) {
+
+    document
+        .querySelectorAll(".category-btn")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+
+    button.classList.add("active");
+
+
+    displayMenu(category);
+
+}
+
+
+/* ==================================================
+   CART
+   ================================================== */
+
+let cart = [];
+
+let discountPercent = 0;
+
+
+/* Add item */
+
+function addToCart(id) {
+
+    const item =
+        menuItems.find(item => item.id === id);
+
+
+    if (!item || !item.available) {
+
+        return;
+
+    }
+
+
+    const existing =
+        cart.find(item => item.id === id);
+
+
+    if (existing) {
+
+        existing.quantity++;
+
+    }
+
+    else {
+
+        cart.push({
+
+            ...item,
+
+            quantity: 1
+
+        });
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* Update cart */
+
+function updateCart() {
+
+    const cartItems =
+        document.getElementById("cartItems");
+
+
+    let total = 0;
+
+
+    if (cart.length === 0) {
+
+        cartItems.innerHTML =
+            "<p>Your cart is empty.</p>";
+
+    }
+
+    else {
+
+        cartItems.innerHTML = "";
+
+
+        cart.forEach(item => {
+
+            const itemTotal =
+                item.price * item.quantity;
+
+
+            total += itemTotal;
+
+
+            const div =
+                document.createElement("div");
+
+
+            div.className =
+                "cart-item";
+
+
+            div.innerHTML = `
+
+                <div>
+
+                    <div class="cart-item-name">
+                        ${item.name}
+                    </div>
+
+                    <small>
+                        ₹${item.price.toFixed(2)} each
+                    </small>
+
+                </div>
+
+
+                <div class="quantity-controls">
+
+                    <button
+                        onclick="changeQuantity('${item.id}', -1)">
+                        −
+                    </button>
+
+                    <span>
+                        ${item.quantity}
+                    </span>
+
+                    <button
+                        onclick="changeQuantity('${item.id}', 1)">
+                        +
+                    </button>
+
+                    <button
+                        class="remove-btn"
+                        onclick="removeFromCart('${item.id}')">
+
+                        Remove
+
+                    </button>
+
+                </div>
+
+            `;
+
+
+            cartItems.appendChild(div);
+
+        });
+
+    }
+
+
+    document.getElementById("cartTotal")
+        .textContent =
+        total.toFixed(2);
+
+
+    updateBill();
+
+}
+
+
+/* Quantity */
+
+function changeQuantity(id, change) {
+
+    const item =
+        cart.find(item => item.id === id);
+
+
+    if (!item)
+        return;
+
+
+    item.quantity += change;
+
+
+    if (item.quantity <= 0) {
+
+        removeFromCart(id);
+
+        return;
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* Remove */
+
+function removeFromCart(id) {
+
+    cart =
+        cart.filter(item => item.id !== id);
+
+
+    updateCart();
+
+}
+
+
+/* Clear */
+
+function clearCart() {
+
+    cart = [];
+
+    discountPercent = 0;
+
+    updateCart();
+
+}
+
+
+/* ==================================================
+   DISCOUNT
+   ================================================== */
+
+function applyDiscount() {
+
+    const code =
+        document
+            .getElementById("discountCode")
+            .value
+            .trim()
+            .toUpperCase();
+
+
+    const message =
+        document.getElementById("discountMessage");
+
+
+    if (code === "SAVE10") {
+
+        discountPercent = 10;
+
+        message.innerHTML = `
+
+            <p style="color:green;margin-top:10px;">
+
+                ✓ 10% discount applied.
+
+            </p>
+
+        `;
+
+    }
+
+    else if (code === "SAVE20") {
+
+        discountPercent = 20;
+
+        message.innerHTML = `
+
+            <p style="color:green;margin-top:10px;">
+
+                ✓ 20% discount applied.
+
+            </p>
+
+        `;
+
+    }
+
+    else {
+
+        discountPercent = 0;
+
+        message.innerHTML = `
+
+            <p style="color:red;margin-top:10px;">
+
+                ✗ Invalid discount code.
+
+            </p>
+
+        `;
+
+    }
+
+
+    updateBill();
+
+}
+
+
+/* ==================================================
+   BILL
+   ================================================== */
+
+function updateBill() {
+
+    let subtotal = 0;
+
+
+    cart.forEach(item => {
+
+        subtotal +=
+            item.price * item.quantity;
+
+    });
+
+
+    const discount =
+        subtotal * discountPercent / 100;
+
+
+    const total =
+        subtotal - discount;
+
+
+    document.getElementById("subtotal")
+        .textContent =
+        subtotal.toFixed(2);
+
+
+    document.getElementById("discount")
+        .textContent =
+        discount.toFixed(2);
+
+
+    document.getElementById("finalTotal")
+        .textContent =
+        total.toFixed(2);
+
+}
+
+
+/* ==================================================
+   PLACE ORDER → JAVA
+   ================================================== */
+
+async function placeOrder() {
+
+    if (cart.length === 0) {
+
+        alert(
+            "Please add items to your cart first."
+        );
+
+        return;
+
+    }
+
+
+    const name =
+        document
+            .getElementById("customerName")
+            .value
+            .trim();
+
+
+    const phone =
+        document
+            .getElementById("customerPhone")
+            .value
+            .trim();
+
+
+    const address =
+        document
+            .getElementById("customerAddress")
+            .value
+            .trim();
+
+
+    const discountCode =
+        document
+            .getElementById("discountCode")
+            .value
+            .trim();
+
+
+    if (!name || !phone || !address) {
+
+        alert(
+            "Please fill in all customer details."
+        );
+
+        return;
+
+    }
+
+
+    /*
+       Convert cart to Java format.
+
+       Example:
+       M01:2,M02:1,M03:1
+    */
+
+    const items =
+        cart.map(item => {
+
+            return item.id +
+                ":" +
+                item.quantity;
+
+        }).join(",");
+
+
+    const data =
+        new URLSearchParams();
+
+
+    data.append(
+        "name",
+        name
+    );
+
+
+    data.append(
+        "phone",
+        phone
+    );
+
+
+    data.append(
+        "address",
+        address
+    );
+
+
+    data.append(
+        "items",
+        items
+    );
+
+
+    data.append(
+        "discount",
+        discountCode
+    );
+
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/order",
+                {
+
+                    method: "POST",
+
+                    headers: {
+
+                        "Content-Type":
+                            "application/x-www-form-urlencoded"
+
+                    },
+
+                    body:
+                        data.toString()
+
+                }
+            );
+
+
+        const result =
+            await response.json();
+
+
+        if (!result.success) {
+
+            alert(
+                result.message
+            );
+
+            return;
+
+        }
+
+
+        /* Show Java result */
+
+        alert(
+            "Order placed successfully!\n\n" +
+            "Order ID: " +
+            result.orderId +
+            "\nTotal: ₹" +
+            Number(result.total).toFixed(2)
+        );
+
+
+        /* Add to website history */
+       const order = {
+
+    id:
+        result.orderId,
+
+    customer:
+        name,
+
+    phone:
+        phone,
+
+    address:
+        address,
+
+    items:
+        [...cart],
+
+    total:
+        Number(result.total),
+
+    date:
+        new Date().toLocaleString("en-GB", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: true
+        })
+
+};
+
+displayOrder(order);
+       
+
+
+           
+  
+
+        /* Clear everything */
+
+        cart = [];
+
+        discountPercent = 0;
+
+
+        document.getElementById("customerName")
+            .value = "";
+
+
+        document.getElementById("customerPhone")
+            .value = "";
+
+
+        document.getElementById("customerAddress")
+            .value = "";
+
+
+        document.getElementById("discountCode")
+            .value = "";
+
+
+        document.getElementById("discountMessage")
+            .innerHTML = "";
+
+
+        updateCart();
+
+
+        document
+            .getElementById("orders")
+            .scrollIntoView();
+
+    }
+
+
+    catch (error) {
+
+        console.error(error);
+
+        alert(
+            "Could not connect to the Java server."
+        );
+
+    }
+
+}
+
+
+/* ==================================================
+   ORDER HISTORY
+   ================================================== */
+
+function displayOrder(order) {
+
+    const history =
+        document.getElementById("orderHistory");
+
+
+    if (
+        history.innerHTML.includes(
+            "No orders placed yet"
+        )
+    ) {
+
+        history.innerHTML = "";
+
+    }
+
+
+    const card =
+        document.createElement("div");
+
+
+    card.className =
+        "order-card";
+
+
+    let itemsText = "";
+
+
+    order.items.forEach(item => {
+
+        itemsText +=
+            `${item.name} × ${item.quantity}<br>`;
+
+    });
+
+
+    card.innerHTML = `
+
+        <h3>
+            Order #${order.id}
+        </h3>
+
+        <p>
+            <strong>Customer:</strong>
+            ${order.customer}
+        </p>
+
+        <p>
+            <strong>Phone:</strong>
+            ${order.phone}
+        </p>
+
+        <p>
+            <strong>Address:</strong>
+            ${order.address}
+        </p>
+
+        <p>
+            <strong>Items:</strong><br>
+            ${itemsText}
+        </p>
+
+        <p>
+            <strong>Total:</strong>
+            ₹${order.total.toFixed(2)}
+        </p>
+
+        <p>
+            <strong>Date:</strong>
+            ${order.date}
+        </p>
+
+    `;
+
+
+    history.prepend(card);
+
+}
+
+
+/* ==================================================
+   START
+   ================================================== */
+
+loadMenu();
+
+updateCart();
+
+</script>
+
+</body>
+</html>
