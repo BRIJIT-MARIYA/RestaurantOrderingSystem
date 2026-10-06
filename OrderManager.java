@@ -30,7 +30,7 @@ public class OrderManager {
         menu.add(new MenuItem("M04", "Veg Fried Rice", 140,
                 MenuItem.Category.MAIN_COURSE, true));
 
-        menu.add(new MenuItem("M05", "Chocolate Cake", 100,
+        menu.add(new MenuItem("M05", "Vancho Cake", 100,
                 MenuItem.Category.DESSERT, true));
 
         menu.add(new MenuItem("M06", "Ice Cream", 70,
