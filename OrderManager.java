@@ -30,7 +30,7 @@ public class OrderManager {
         menu.add(new MenuItem("M04", "Veg Fried Rice", 140,
                 MenuItem.Category.MAIN_COURSE, true));
 
-        menu.add(new MenuItem("M05", "Vancho Cake", 100,
+        menu.add(new MenuItem("M05", "Chocolate Cake", 100,
                 MenuItem.Category.DESSERT, true));
 
         menu.add(new MenuItem("M06", "Ice Cream", 70,
@@ -38,6 +38,10 @@ public class OrderManager {
 
         menu.add(new MenuItem("M07", "Fresh Lime", 50,
                 MenuItem.Category.BEVERAGE, true));
+        
+        menu.add(new MenuItem("M08", "Vancho Cake", 120,
+                MenuItem.Category.DESSERT, true));
+        
     }
 
     // Add discount codes
