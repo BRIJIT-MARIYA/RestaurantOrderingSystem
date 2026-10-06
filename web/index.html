@@ -902,11 +902,10 @@ const menuImages = {
     "M06":
     "https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=80",
 
-     "M07":
+    "M07":
     "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=900&q=80",
 
-    "M08":"https://www.greatestbakery.in/wp-content/uploads/2021/12/Buy-Vancho-in-Nagercoil.jpg"
-    
+    "M08":"https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80"
 
 };
 
@@ -930,8 +929,8 @@ function getDescription(id) {
         "M06": "Creamy and delicious ice cream.",
 
         "M07": "Refreshing fresh lime drink.",
-
-        "M08": "Delicious Vancho Cake."
+         
+        "M08": "Delicious vancho cake."
 
     };
 
@@ -1631,39 +1630,7 @@ async function placeOrder() {
 
 
         /* Add to website history */
-       const order = {
 
-    id:
-        result.orderId,
-
-    customer:
-        name,
-
-    phone:
-        phone,
-
-    address:
-        address,
-
-    items:
-        [...cart],
-
-    total:
-        Number(result.total),
-
-    date:
-        new Date().toLocaleString("en-GB", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: true
-        })
-
-};
-
-displayOrder(order);
        
 
 
