@@ -118,6 +118,9 @@ HttpServer server = HttpServer.create(
         addMenuItem(json, "M06");
         json.append(",");
         addMenuItem(json, "M07");
+         json.append(",");
+        addMenuItem(json, "M08");
+                
 
         json.append("]");
 
